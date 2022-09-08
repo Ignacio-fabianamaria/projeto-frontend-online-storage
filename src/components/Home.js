@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   render() {
@@ -16,13 +16,12 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <div>
-          <button
-            type="button"
+          <Link
             data-testid="shopping-cart-button"
-            onChange={ <Redirect to="/carrinho" /> }
+            to="/carrinho"
           >
             Carrinho
-          </button>
+          </Link>
         </div>
       </div>
     );
