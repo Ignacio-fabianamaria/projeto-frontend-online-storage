@@ -1,24 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
   constructor() {
     super();
-
     this.trocarInput = this.trocarInput.bind(this);
     this.botaoParaLocalizar = this.botaoParaLocalizar.bind(this);
-
-    state = {
-      busca: '',
+    this.state = {
+      // busca: '',
       data: [],
-      infoFrase: true,
-      mensagem: '',
+     infoFrase: true,
+     mensagem: '',
       name: '',
-      nomeProduto: '',
-      produtoImagem: '',
-      precoProduto: 0,
+      // nomeProduto: '',
+      // produtoImagem: '',
+      // precoProduto: 0,
       arrayLista: [],
+
     };
   }
 
@@ -33,22 +32,26 @@ class Home extends React.Component {
   };
 
   trocarInput(evento) {
+    console.log(evento.target.value);
     this.setState({ name: evento.target.value }, () => {
     });
   }
 
   async botaoParaLocalizar() {
     const { name } = this.state;
-    this.setState({ name: '' });
     const resultado = await getProductsFromCategoryAndQuery(name);
-    this.setState = {
+    console.log(resultado);
+    this.setState({
+      name: '',
       nomeProduto: name,
-      arrayLista: resultado,
-    };
+      arrayLista: resultado.results,
+      infoFrase: false,
+      mensagem: 'Nenhum produto foi encontrado',
+    });
   }
 
   render() {
-    const { data, name, arrayLista } = this.state;
+    const { data, name, arrayLista, nomeProduto, infoFrase, mensagem } = this.state;
     return (
       <div>
         <form>
@@ -60,6 +63,7 @@ class Home extends React.Component {
               value={ name }
               onChange={ this.trocarInput }
             />
+            {/* {console.log('input')} */}
           </label>
           <div htmlFor="query-button">
             <button
@@ -84,26 +88,33 @@ class Home extends React.Component {
           </Link>
         </div>
         <div>
-          {arrayLista.map((element) => (
-            <div key={ element.id }>
-              <label
-                htmlFor={ element.id }
-                data-testid="category"
-              >
-                <input
-                  type="checkbox"
-                  name={ element.title }
-                  id={ element.id }
-                />
-
-              </label>
-              <p>
-                {element.title}
-              </p>
-              <image src={ element.thumbnail } />
-
-            </div>
+          {data.map((element) => (
+            <label
+              htmlFor={ element.id }
+              key={ element.id }
+              data-testid="category"
+            >
+              <input
+                type="checkbox"
+                name={ element.name }
+                id={ element.id }
+              />
+              {element.name}
+            </label>
           ))}
+        </div>
+        <div>
+          <h3>{`Exibindo os resultados da Pesquisa por: ${nomeProduto}`}</h3>
+          { infoFrase && mensagem }
+          { (arrayLista.length > 0)
+            ? arrayLista.map((element) => ( // produtos
+              <div key={ element.id } data-testid="product">
+                <p>{ element.title }</p>
+                <img src={ element.thumbnail } alt={ element.title } />
+                <p>{ `R$: ${element.price}` }</p>
+              </div>
+            ))
+            : <p>Nenhum produto foi encontrado</p>}
         </div>
       </div>
     );
