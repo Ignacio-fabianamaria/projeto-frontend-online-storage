@@ -10,8 +10,6 @@ class Home extends React.Component {
     this.state = {
       // busca: '',
       data: [],
-     infoFrase: true,
-     mensagem: '',
       name: '',
       // nomeProduto: '',
       // produtoImagem: '',
@@ -27,7 +25,6 @@ class Home extends React.Component {
 
   functionGetCategories = async () => {
     const response = await getCategories();
-    console.log(response);
     this.setState({ data: response });
   };
 
@@ -39,27 +36,30 @@ class Home extends React.Component {
 
   async botaoParaLocalizar() {
     const { name } = this.state;
-    const resultado = await getProductsFromCategoryAndQuery(name);
+    const resultado = await getProductsFromCategoryAndQuery('', name);
     console.log(resultado);
-    this.setState({
-      name: '',
-      nomeProduto: name,
-      arrayLista: resultado.results,
-      infoFrase: false,
-      mensagem: 'Nenhum produto foi encontrado',
-    });
+    if (name.length < 1) {
+      this.setState({
+        arrayLista: false,
+      });
+    } else {
+      this.setState({
+        arrayLista: resultado.results,
+      });
+    }
   }
 
   render() {
-    const { data, name, arrayLista, nomeProduto, infoFrase, mensagem } = this.state;
+    const { data, name, arrayLista } = this.state;
     return (
       <div>
         <form>
-          <label htmlFor="search-input" data-testid="query-input">
+          <label htmlFor="search-input">
             Favorita
             <input
-              type="text"
+              type="search"
               id="search-input"
+              data-testid="query-input"
               value={ name }
               onChange={ this.trocarInput }
             />
@@ -104,9 +104,7 @@ class Home extends React.Component {
           ))}
         </div>
         <div>
-          <h3>{`Exibindo os resultados da Pesquisa por: ${nomeProduto}`}</h3>
-          { infoFrase && mensagem }
-          { (arrayLista.length > 0)
+          { (arrayLista)
             ? arrayLista.map((element) => ( // produtos
               <div key={ element.id } data-testid="product">
                 <p>{ element.title }</p>
