@@ -8,14 +8,13 @@ class Home extends React.Component {
   };
 
   async componentDidMount() {
-    await this.functionGetCategories();
+    this.functionGetCategories();
   }
 
   functionGetCategories = async () => {
-    const teste = await getCategories();
-    this.setState({
-      data: teste,
-    });
+    const response = await getCategories();
+    this.setState({ data: response });
+    console.log(response);
   };
 
   render() {
@@ -34,16 +33,18 @@ class Home extends React.Component {
         </h2>
         <div>
           {data.map((element) => (
-            <div
+            <label
+              htmlFor={ element.id }
               key={ element.id }
-              name={ element.name }
+              data-testid="category"
             >
               <input
                 type="radio"
                 name={ element.name }
                 id={ element.id }
               />
-            </div>
+              { element.name }
+            </label>
           ))}
         </div>
       </div>
