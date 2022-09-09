@@ -6,6 +6,7 @@ class Home extends React.Component {
   state = {
     data: [],
     // name: '',
+    // price:'',
   };
 
   async componentDidMount() {
@@ -22,13 +23,24 @@ class Home extends React.Component {
     const { data } = this.state;
     return (
       <div>
-        <label htmlFor="search-input">
-          Favorita
-          <input
-            type="text"
-            id="search-input"
-          />
-        </label>
+        <form>
+          <label htmlFor="search-input" data-testid="query-input">
+            Favorita
+            <input
+              type="text"
+              id="search-input"
+            />
+          </label>
+          <div htmlFor="query-button">
+            <button
+              type="submit"
+              data-testid="query-button"
+            >
+              Search
+            </button>
+            {data.name}
+          </div>
+        </form>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
@@ -48,11 +60,11 @@ class Home extends React.Component {
               data-testid="category"
             >
               <input
-                type="radio"
+                type="checkbox"
                 name={ element.name }
                 id={ element.id }
               />
-              { element.name }
+              {element.name}
             </label>
           ))}
         </div>
