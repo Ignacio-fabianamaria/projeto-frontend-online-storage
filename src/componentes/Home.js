@@ -13,8 +13,8 @@ class Home extends React.Component {
 
   functionGetCategories = async () => {
     const response = await getCategories();
-    this.setState({ data: response });
     console.log(response);
+    this.setState({ data: response });
   };
 
   render() {
