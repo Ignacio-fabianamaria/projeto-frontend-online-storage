@@ -115,9 +115,17 @@ class Home extends React.Component {
           { (arrayLista)
             ? arrayLista.map((element) => ( // produtos
               <div key={ element.id } data-testid="product">
-                <p>{ element.title }</p>
-                <img src={ element.thumbnail } alt={ element.title } />
-                <p>{ `R$: ${element.price}` }</p>
+                <Link
+                  to={ `/detalhes/${element.title} ` }
+                >
+                  <p data-testid="product-detail-name">{ element.title }</p>
+                </Link>
+                <img
+                  data-testid="product-detail-image"
+                  src={ element.thumbnail }
+                  alt={ element.title }
+                />
+                <p data-testid="product-detail-price">{ `R$: ${element.price}` }</p>
               </div>
             ))
             : <p>Nenhum produto foi encontrado</p>}
