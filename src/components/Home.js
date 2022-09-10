@@ -28,11 +28,12 @@ class Home extends React.Component {
     this.setState({ data: response });
   };
 
-  trocarInput(evento) {
-    console.log(evento.target.value);
-    this.setState({ name: evento.target.value }, () => {
-    });
-  }
+  ShowProductCategory = async ({ target }) => { // função para exibir os produtos ao selecionar o input de categoria
+    const { id } = target;
+    const { name } = this.state;
+    const retProductCategory = await getProductsFromCategoryAndQuery(id, name);
+    this.setState({ arrayLista: retProductCategory.results });
+  };
 
   async botaoParaLocalizar() {
     const { name } = this.state;
@@ -47,6 +48,12 @@ class Home extends React.Component {
         arrayLista: resultado.results,
       });
     }
+  }
+
+  trocarInput(evento) {
+    console.log(evento.target.value);
+    this.setState({ name: evento.target.value }, () => {
+    });
   }
 
   render() {
@@ -98,6 +105,7 @@ class Home extends React.Component {
                 type="checkbox"
                 name={ element.name }
                 id={ element.id }
+                onClick={ this.ShowProductCategory }
               />
               {element.name}
             </label>
