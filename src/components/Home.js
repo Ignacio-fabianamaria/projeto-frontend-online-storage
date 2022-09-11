@@ -117,6 +117,7 @@ class Home extends React.Component {
               <div key={ element.id } data-testid="product">
                 <Link
                   to={ `/detalhes/${element.title} ` }
+                  data-testid="product-detail-link"
                 >
                   <p data-testid="product-detail-name">{ element.title }</p>
                 </Link>
