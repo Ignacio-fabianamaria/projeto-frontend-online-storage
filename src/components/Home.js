@@ -116,7 +116,7 @@ class Home extends React.Component {
             ? arrayLista.map((element) => ( // produtos
               <div key={ element.id } data-testid="product">
                 <Link
-                  to={ `/detalhes/${element.title} ` }
+                  to={ `/detalhes/${element.id} ` }
                   data-testid="product-detail-link"
                 >
                   <p data-testid="product-detail-name">{ element.title }</p>

@@ -14,6 +14,7 @@ export async function getCategories() {
 console.log('string');
 getCategories();
 // Implemente aqui teste requisito 1
+
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   const apiIdQuery = (`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`);
   try {
@@ -26,7 +27,7 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
 }
 // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
 export async function getProductById(id) {
-  const apiIdQuery = (` https://api.mercadolibre.com/items/${id}`);
+  const apiIdQuery = (` https://api.mercadolibre.com/items/${id} `);
   try {
     const endpoint = await fetch(apiIdQuery);
     const resultado = await endpoint.json();
