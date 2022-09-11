@@ -127,6 +127,13 @@ class Home extends React.Component {
                   alt={ element.title }
                 />
                 <p data-testid="product-detail-price">{ `R$: ${element.price}` }</p>
+                <button
+                  // onClick={ }
+                  type="button"
+                  data-testid="product-add-to-cart"
+                >
+                  Adicionar ao carrinho
+                </button>
               </div>
             ))
             : <p>Nenhum produto foi encontrado</p>}

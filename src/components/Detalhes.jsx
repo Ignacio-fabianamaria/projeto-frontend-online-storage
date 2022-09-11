@@ -30,15 +30,14 @@ class Detalhes extends React.Component {
 
     return (
       <div>
-        <h1>xablau?</h1>
         <Link
           data-testid="shopping-cart-button"
           to="/carrinho"
         >
-          Carrinhossss
+          Carrinho
         </Link>
         <div>
-          <h4 data-testid="product-detail-name">{ title }</h4>
+          <h1 data-testid="product-detail-name">{ title }</h1>
           <img src={ thumbnail } alt={ title } data-testid="product-detail-image" />
           <p data-testid="product-detail-price">{ price }</p>
         </div>
