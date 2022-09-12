@@ -16,7 +16,6 @@ class Home extends React.Component {
       // produtoImagem: '',
       // precoProduto: 0,
       arrayLista: [],
-
     };
   }
 
@@ -39,9 +38,9 @@ class Home extends React.Component {
   handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
     console.log('item clicado');
     const { arrayCartItens } = this.state;
-    arrayCartItens.push(item);// .push para adicionar  produto clicado  ao  arrayCartItens
-    this.setState({ arrayCartItens });
-    this.addLocalStorage(arrayCartItens);
+    const novoArray = [...arrayCartItens, item];
+    this.addLocalStorage(novoArray);
+    this.setState({ arrayCartItens: novoArray });
   };
 
   addLocalStorage = (item) => {
@@ -143,7 +142,7 @@ class Home extends React.Component {
                 />
                 <p data-testid="product-detail-price">{ `R$: ${element.price}` }</p>
                 <button
-                  onClick={ this.handleAddCartItens }
+                  onClick={ () => this.handleAddCartItens(element) }
                   type="button"
                   data-testid="product-add-to-cart"
                 >
