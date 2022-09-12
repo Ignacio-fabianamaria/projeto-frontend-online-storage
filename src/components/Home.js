@@ -8,6 +8,7 @@ class Home extends React.Component {
     this.trocarInput = this.trocarInput.bind(this);
     this.botaoParaLocalizar = this.botaoParaLocalizar.bind(this);
     this.state = {
+      arrayCartItens: [],
       // busca: '',
       data: [],
       name: '',
@@ -33,6 +34,20 @@ class Home extends React.Component {
     const { name } = this.state;
     const retProductCategory = await getProductsFromCategoryAndQuery(id, name);
     this.setState({ arrayLista: retProductCategory.results });
+  };
+
+  handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
+    console.log('item clicado');
+    const { arrayCartItens } = this.state;
+    arrayCartItens.push(item);// .push para adicionar  produto clicado  ao  arrayCartItens
+    this.setState({ arrayCartItens });
+    this.addLocalStorage(arrayCartItens);
+  };
+
+  addLocalStorage = (item) => {
+    const itemToAddCart = JSON.stringify(item);
+    localStorage.setItem('arrayCartItens', itemToAddCart);
+    // Inserindo método setItem para salvar dados no localstorage.Os dados ficarão salvos na chave (arrayCartItens)
   };
 
   async botaoParaLocalizar() {
@@ -128,7 +143,7 @@ class Home extends React.Component {
                 />
                 <p data-testid="product-detail-price">{ `R$: ${element.price}` }</p>
                 <button
-                  // onClick={ }
+                  onClick={ this.handleAddCartItens }
                   type="button"
                   data-testid="product-add-to-cart"
                 >
