@@ -10,14 +10,15 @@ class Carrinho extends React.Component {
   }
 
   componentDidMount() {
-    const cartArea = this.getItemLocalStorage();
+    const cartAreas = this.getItemLocalStorage();
     console.log(cartArea, 'oi');
-    this.setState({ cartArea });
+    this.setState({ cartArea: cartAreas });
   }
 
   getItemLocalStorage = () => {
     const getProduct = localStorage.getItem('arrayCartItens');
-    return JSON.parse(getProduct);// / usando o método JSON.parse para analisar a string  salva no localstorage e retornar os dados como objeto.
+    return JSON.parse(getProduct);
+    // / usando o método JSON.parse para analisar a string  salva no localstorage e retornar os dados como objeto.
   };
 
   render() {
