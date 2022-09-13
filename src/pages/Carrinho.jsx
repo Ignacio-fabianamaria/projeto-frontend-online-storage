@@ -5,14 +5,30 @@ class Carrinho extends React.Component {
     super();
     this.state = {
       cartArea: [],
+      quantity: 1,
     };
   }
 
   componentDidMount() {
     const cartArea = this.getItemLocalStorage();
-    console.log(cartArea, 'oi');
+    // console.log(cartArea, 'oi');
     this.setState({ cartArea });
   }
+
+  handleIncreaseDecrease = ({ target }) => {
+    if (target.id === 'addItem') {
+      this.setState((prevstate) => ({ quantity: prevstate.quantity + 1 }));
+    } else {
+      this.setState((prevstate) => ({ quantity: prevstate.quantity - 1 }));
+    }
+  };
+
+  handleDeletItem = ({ target }) => {
+    const deletItem = JSON.parse(localStorage.getItem('arrayCartItens'));
+    const newCart = deletItem.find((e) => e.title === target.id);
+    localStorage.setItem('arrayCartItens', JSON.stringify(newCart));
+    this.setState({ cartArea: newCart });
+  };
 
   getItemLocalStorage = () => {
     const getProduct = localStorage.getItem('arrayCartItens');
@@ -20,7 +36,7 @@ class Carrinho extends React.Component {
   };
 
   render() {
-    const { cartArea } = this.state;
+    const { cartArea, quantity } = this.state;
     return (
       <div>
 
@@ -31,7 +47,30 @@ class Carrinho extends React.Component {
                 <p data-testid="shopping-cart-product-name">{ e.title }</p>
                 <img src={ e.thumbnail } alt={ e.title } />
                 <p>{ e.price }</p>
-                <p data-testid="shopping-cart-product-quantity">1</p>
+                <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+                <button
+                  onClick={ this.handleIncreaseDecrease }
+                  type="button"
+                  id="addItem"
+                  data-testid="product-increase-quantity"
+                >
+                  +
+                </button>
+                <button
+                  onClick={ this.handleIncreaseDecrease }
+                  type="button"
+                  id="decreaseItem"
+                  data-testid="product-decrease-quantity"
+                >
+                  -
+                </button>
+                <button
+                  onClick={ this.handleDeletItem }
+                  type="button"
+                  data-testid="remove-product"
+                >
+                  x
+                </button>
               </div>
             ))
             : <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>}
