@@ -24,6 +24,20 @@ class Detalhes extends React.Component {
     this.setState({ arrayProdutos: response });
   };
 
+  handleDetailAddCart = (item) => {
+    const { arrayProdutos } = this.state;
+    // const { title, thumbnail, price} = arrayProdutos;
+    const toCartArray = [...arrayProdutos, item];
+    this.addLocalStorage(toCartArray);
+    this.setState({ arrayProdutos: toCartArray });
+  };
+
+  addLocalStorage = (item) => {
+    const itemToAddCart = JSON.stringify(item);
+    localStorage.setItem('arrayProdutos', itemToAddCart);
+    // Inserindo método setItem para salvar dados no localstorage.Os dados ficarão salvos na chave (arrayCartItens)
+  };
+
   render() {
     const { arrayProdutos } = this.state;
     const { title, thumbnail, price } = arrayProdutos;
@@ -40,6 +54,13 @@ class Detalhes extends React.Component {
           <h1 data-testid="product-detail-name">{ title }</h1>
           <img src={ thumbnail } alt={ title } data-testid="product-detail-image" />
           <p data-testid="product-detail-price">{ price }</p>
+          <button
+            onClick={ this.handleDetailAddCart }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
 
       </div>
