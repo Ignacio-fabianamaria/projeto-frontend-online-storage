@@ -36,10 +36,11 @@ class Home extends React.Component {
   };
 
   handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
-    // console.log('item clicado');
+    console.log('item clicado');
     // const { arrayCartItens } = this.state;
-    const getLocalStorage = JSON.parse(localStorage.getItem('arrayCartItens') || []);
-    const novoArray = [...getLocalStorage, item];
+    const teste = JSON.parse(localStorage.getItem('arrayCartItens')) || [];
+    // console.log(teste);
+    const novoArray = [...teste, item];
     this.addLocalStorage(novoArray);
     // this.setState({ arrayCartItens: novoArray });
   };

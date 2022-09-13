@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
 // import Home from './Home';
+
 class Detalhes extends React.Component {
   constructor() {
     super();
+
     this.state = {
       arrayProdutos: [],
     };
@@ -29,9 +31,11 @@ class Detalhes extends React.Component {
   //   this.addLocalStorage(toCartArray);
   //   this.setState({ arrayProdutos: toCartArray });
   // };
+
   handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
     console.log('item clicado');
     const teste = JSON.parse(localStorage.getItem('arrayCartItens')) || [];
+
     const novoArray = [...teste, item];
     this.addLocalStorage(novoArray);
   };
@@ -45,6 +49,7 @@ class Detalhes extends React.Component {
   render() {
     const { arrayProdutos } = this.state;
     const { title, thumbnail, price } = arrayProdutos;
+
     return (
       <div>
         <Link
@@ -65,13 +70,16 @@ class Detalhes extends React.Component {
             Adicionar ao carrinho
           </button>
         </div>
+
       </div>
     );
   }
 }
+
 Detalhes.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string })
       .isRequired }).isRequired,
 };
+
 export default Detalhes;
