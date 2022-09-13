@@ -8,7 +8,7 @@ class Home extends React.Component {
     this.trocarInput = this.trocarInput.bind(this);
     this.botaoParaLocalizar = this.botaoParaLocalizar.bind(this);
     this.state = {
-      arrayCartItens: [],
+      // arrayCartItens: [],
       // busca: '',
       data: [],
       name: '',
@@ -36,11 +36,12 @@ class Home extends React.Component {
   };
 
   handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
-    console.log('item clicado');
-    const { arrayCartItens } = this.state;
-    const novoArray = [...arrayCartItens, item];
+    // console.log('item clicado');
+    // const { arrayCartItens } = this.state;
+    const getLocalStorage = JSON.parse(localStorage.getItem('arrayCartItens') || []);
+    const novoArray = [...getLocalStorage, item];
     this.addLocalStorage(novoArray);
-    this.setState({ arrayCartItens: novoArray });
+    // this.setState({ arrayCartItens: novoArray });
   };
 
   addLocalStorage = (item) => {

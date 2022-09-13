@@ -10,9 +10,9 @@ class Carrinho extends React.Component {
   }
 
   componentDidMount() {
-    const cartArea = this.getItemLocalStorage();
+    const getLocal = this.getItemLocalStorage();
     // console.log(cartArea, 'oi');
-    this.setState({ cartArea });
+    this.setState({ cartArea: getLocal });
   }
 
   handleIncreaseDecrease = ({ target }) => {
@@ -25,7 +25,7 @@ class Carrinho extends React.Component {
 
   handleDeletItem = ({ target }) => {
     const deletItem = JSON.parse(localStorage.getItem('arrayCartItens'));
-    const newCart = deletItem.find((e) => e.title === target.id);
+    const newCart = deletItem.some((e) => e.title !== target.id);
     localStorage.setItem('arrayCartItens', JSON.stringify(newCart));
     this.setState({ cartArea: newCart });
   };
@@ -39,7 +39,6 @@ class Carrinho extends React.Component {
     const { cartArea, quantity } = this.state;
     return (
       <div>
-
         <div>
           { (cartArea)
             ? cartArea.map((e) => (
