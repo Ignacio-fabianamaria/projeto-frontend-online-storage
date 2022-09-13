@@ -11,7 +11,6 @@ class Carrinho extends React.Component {
 
   componentDidMount() {
     const getLocal = this.getItemLocalStorage();
-    // console.log(cartArea, 'oi');
     this.setState({ cartArea: getLocal });
   }
 
