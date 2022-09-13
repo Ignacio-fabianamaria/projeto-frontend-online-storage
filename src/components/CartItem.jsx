@@ -10,23 +10,17 @@ class CartItem extends React.Component {
   }
 
   handleIncreaseDecrease = ({ target }) => {
+    const { quantity } = this.state;
     if (target.id === 'addItem') {
       this.setState((prevstate) => ({ quantity: prevstate.quantity + 1 }));
-    } else {
+    } else if (quantity > 1) {
       this.setState((prevstate) => ({ quantity: prevstate.quantity - 1 }));
     }
   };
 
-  handleDeletItem = (id) => {
-    const deletItem = JSON.parse(localStorage.getItem('arrayCartItens'));
-    const newCart = deletItem.filter((e) => e.id !== id);
-    console.log(newCart);
-    localStorage.setItem('arrayCartItens', JSON.stringify(newCart));
-  };
-
   render() {
     const { quantity } = this.state;
-    const { e } = this.props;
+    const { e, onClick } = this.props;
     return (
       <div>
         <p data-testid="shopping-cart-product-name">{ e.title }</p>
@@ -50,7 +44,7 @@ class CartItem extends React.Component {
           -
         </button>
         <button
-          onClick={ () => this.handleDeletItem(e.id) }
+          onClick={ onClick }
           type="button"
           data-testid="remove-product"
         >
