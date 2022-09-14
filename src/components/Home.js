@@ -8,6 +8,7 @@ class Home extends React.Component {
     this.trocarInput = this.trocarInput.bind(this);
     this.botaoParaLocalizar = this.botaoParaLocalizar.bind(this);
     this.state = {
+      // arrayCartItens: [],
       // busca: '',
       data: [],
       name: '',
@@ -15,7 +16,6 @@ class Home extends React.Component {
       // produtoImagem: '',
       // precoProduto: 0,
       arrayLista: [],
-
     };
   }
 
@@ -33,6 +33,22 @@ class Home extends React.Component {
     const { name } = this.state;
     const retProductCategory = await getProductsFromCategoryAndQuery(id, name);
     this.setState({ arrayLista: retProductCategory.results });
+  };
+
+  handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
+    console.log('item clicado');
+    // const { arrayCartItens } = this.state;
+    const teste = JSON.parse(localStorage.getItem('arrayCartItens')) || [];
+    // console.log(teste);
+    const novoArray = [...teste, item];
+    this.addLocalStorage(novoArray);
+    // this.setState({ arrayCartItens: novoArray });
+  };
+
+  addLocalStorage = (item) => {
+    const itemToAddCart = JSON.stringify(item);
+    localStorage.setItem('arrayCartItens', itemToAddCart);
+    // Inserindo método setItem para salvar dados no localstorage.Os dados ficarão salvos na chave (arrayCartItens)
   };
 
   async botaoParaLocalizar() {
@@ -116,7 +132,7 @@ class Home extends React.Component {
             ? arrayLista.map((element) => ( // produtos
               <div key={ element.id } data-testid="product">
                 <Link
-                  to={ `/detalhes/${element.title} ` }
+                  to={ `/detalhes/${element.id} ` }
                   data-testid="product-detail-link"
                 >
                   <p data-testid="product-detail-name">{ element.title }</p>
@@ -127,6 +143,13 @@ class Home extends React.Component {
                   alt={ element.title }
                 />
                 <p data-testid="product-detail-price">{ `R$: ${element.price}` }</p>
+                <button
+                  onClick={ () => this.handleAddCartItens(element) }
+                  type="button"
+                  data-testid="product-add-to-cart"
+                >
+                  Adicionar ao carrinho
+                </button>
               </div>
             ))
             : <p>Nenhum produto foi encontrado</p>}

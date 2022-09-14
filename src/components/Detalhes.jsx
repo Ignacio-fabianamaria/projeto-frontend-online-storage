@@ -24,23 +24,51 @@ class Detalhes extends React.Component {
     this.setState({ arrayProdutos: response });
   };
 
+  // handleDetailAddCart = (item) => {
+  //   const { arrayProdutos } = this.state;
+  //   // const { title, thumbnail, price} = arrayProdutos;
+  //   const toCartArray = [...arrayProdutos, item];
+  //   this.addLocalStorage(toCartArray);
+  //   this.setState({ arrayProdutos: toCartArray });
+  // };
+
+  handleAddCartItens = (item) => { // função para adicionar produto ao carrinho
+    console.log('item clicado');
+    const teste = JSON.parse(localStorage.getItem('arrayCartItens')) || [];
+
+    const novoArray = [...teste, item];
+    this.addLocalStorage(novoArray);
+  };
+
+  addLocalStorage = (item) => {
+    const itemToAddCart = JSON.stringify(item);
+    localStorage.setItem('arrayCartItens', itemToAddCart);
+    // Inserindo método setItem para salvar dados no localstorage.Os dados ficarão salvos na chave (arrayCartItens)
+  };
+
   render() {
     const { arrayProdutos } = this.state;
     const { title, thumbnail, price } = arrayProdutos;
 
     return (
       <div>
-        <h1>xablau?</h1>
         <Link
           data-testid="shopping-cart-button"
           to="/carrinho"
         >
-          Carrinhossss
+          Carrinho
         </Link>
         <div>
-          <h4 data-testid="product-detail-name">{ title }</h4>
+          <h1 data-testid="product-detail-name">{ title }</h1>
           <img src={ thumbnail } alt={ title } data-testid="product-detail-image" />
           <p data-testid="product-detail-price">{ price }</p>
+          <button
+            onClick={ () => this.handleAddCartItens(arrayProdutos) }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
 
       </div>
