@@ -124,7 +124,7 @@ input[ type = 'checkbox' ] {
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: space-around ;
+  justify-content: space-around;
 
 }
 
@@ -133,13 +133,13 @@ a {
   text-decoration: none;
 }
 
-p[ data-testid = 'product-detail-name' ] {
+[ data-testid = 'product-detail-name' ] {
   font-size: 1.3em;
   padding: 1em;
   width: 15em;
 }
 
-img[ data-testid = 'product-detail-image' ] {
+[ data-testid = 'product-detail-image' ] {
   border-radius: 5px;
   height: auto;
   max-width: 100%;
@@ -147,13 +147,13 @@ img[ data-testid = 'product-detail-image' ] {
 
 }
 
-p[ data-testid = 'product-detail-price' ] {
+[ data-testid = 'product-detail-price' ] {
   font-size: 1.5em;
   font-weight: 900;
   margin: 0.5em;
 }
 
-button[ data-testid = 'product-add-to-cart' ] {
+[ data-testid = 'product-add-to-cart' ] {
   background: none;
   border: none;
   color: black;
@@ -163,6 +163,6 @@ button[ data-testid = 'product-add-to-cart' ] {
 
 }
 
-button[ data-testid = 'product-add-to-cart' ]:hover {
+[ data-testid = 'product-add-to-cart' ]:hover {
   transform: scale(1.2);
 }

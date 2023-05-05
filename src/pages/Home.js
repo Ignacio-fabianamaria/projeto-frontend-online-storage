@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Products from '../components/Products';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../styles/home.css';
@@ -94,14 +95,15 @@ class Home extends React.Component {
             >
               <i className="fa fa-search search-icon" />
             </button>
-            <button
-              className="button-cart"
-              type="button"
-              data-testid="shopping-cart-button"
-              to="/carrinho"
-            >
-              <i className="fa fa-shopping-cart" />
-            </button>
+            <Link to="/carrinho">
+              <button
+                className="button-cart"
+                type="button"
+                data-testid="shopping-cart-button"
+              >
+                🛒
+              </button>
+            </Link>
             {data.name}
 
           </form>
