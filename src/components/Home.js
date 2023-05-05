@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import '../styles/home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -75,10 +76,10 @@ class Home extends React.Component {
   render() {
     const { data, name, arrayLista } = this.state;
     return (
-      <div>
-        <form>
+      <div className="home">
+        <form className="form-search">
+          <h1 className="title"> 🛍️ Shopping online</h1>
           <label htmlFor="search-input">
-            Favorita
             <input
               type="search"
               id="search-input"
@@ -90,11 +91,20 @@ class Home extends React.Component {
           </label>
           <div htmlFor="query-button">
             <button
+              className="button-search"
               onClick={ this.botaoParaLocalizar }
               type="button"
               data-testid="query-button"
             >
-              Search
+              <i className="fa fa-search search-icon" />
+            </button>
+            <button
+              className="button-cart"
+              type="button"
+              data-testid="shopping-cart-button"
+              to="/carrinho"
+            >
+              <i className="fa fa-shopping-cart" />
             </button>
             {data.name}
           </div>
@@ -102,15 +112,7 @@ class Home extends React.Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <div>
-          <Link
-            data-testid="shopping-cart-button"
-            to="/carrinho"
-          >
-            Carrinho
-          </Link>
-        </div>
-        <div>
+        <div className="categories">
           {data.map((element) => (
             <label
               htmlFor={ element.id }
@@ -127,10 +129,10 @@ class Home extends React.Component {
             </label>
           ))}
         </div>
-        <div>
+        <div className="product-list">
           { (arrayLista)
             ? arrayLista.map((element) => ( // produtos
-              <div key={ element.id } data-testid="product">
+              <div className="card-product" key={ element.id } data-testid="product">
                 <Link
                   to={ `/detalhes/${element.id} ` }
                   data-testid="product-detail-link"
@@ -148,7 +150,7 @@ class Home extends React.Component {
                   type="button"
                   data-testid="product-add-to-cart"
                 >
-                  Adicionar ao carrinho
+                  <i className="fa fa-shopping-cart" />
                 </button>
               </div>
             ))
