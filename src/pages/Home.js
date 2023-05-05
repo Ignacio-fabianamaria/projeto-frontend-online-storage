@@ -9,13 +9,8 @@ class Home extends React.Component {
     this.trocarInput = this.trocarInput.bind(this);
     this.botaoParaLocalizar = this.botaoParaLocalizar.bind(this);
     this.state = {
-      // arrayCartItens: [],
-      // busca: '',
       data: [],
       name: '',
-      // nomeProduto: '',
-      // produtoImagem: '',
-      // precoProduto: 0,
       arrayLista: [],
     };
   }
@@ -77,6 +72,7 @@ class Home extends React.Component {
     const { data, name, arrayLista } = this.state;
     return (
       <div className="home">
+
         <form className="form-search">
           <h1 className="title"> 🛍️ Shopping online</h1>
           <label htmlFor="search-input">

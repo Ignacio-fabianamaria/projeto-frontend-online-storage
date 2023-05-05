@@ -1,13 +1,10 @@
 import React from 'react';
-import CartItem from '../components/CartItem';
+import CartItem from './CartItem';
 
 class Carrinho extends React.Component {
-  // constructor() {
-  //   super();
   state = {
     cartArea: [],
   };
-  // }
 
   componentDidMount() {
     const getLocal = this.getItemLocalStorage();

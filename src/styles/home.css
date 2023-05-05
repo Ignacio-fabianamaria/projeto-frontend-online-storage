@@ -92,7 +92,6 @@ h2 {
   width: 90%;
 }
 
-
 label[ for ] {
   font-size: 0.9em;
   margin-right: 0.5em;
@@ -113,7 +112,7 @@ input[ type = 'checkbox' ] {
 
 .card-product {
   align-items: center;
-  background-color: rgb(226, 241, 254);
+  background-color: white;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
