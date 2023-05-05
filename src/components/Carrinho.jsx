@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
+import '../styles/carrinho.css';
 
 class Carrinho extends React.Component {
   state = {
@@ -30,7 +32,10 @@ class Carrinho extends React.Component {
     const { cartArea } = this.state;
     return (
       <div>
-
+        <nav>
+          <h1 className="title"> 🛍️ Shopping online</h1>
+          <Link to="home" className="link-home"> Home</Link>
+        </nav>
         <div>
           { (cartArea)
             ? cartArea.map((e) => (
