@@ -34,7 +34,10 @@ class Carrinho extends React.Component {
       <div>
         <nav>
           <h1 className="title"> 🛍️ Shopping online</h1>
-          <Link to="home" className="link-home"> Home</Link>
+          <Link to="/" className="link-home">
+            <i className="fa fa-home home-icon" />
+            Home
+          </Link>
         </nav>
         <div>
           { (cartArea)
