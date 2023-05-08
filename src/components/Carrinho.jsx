@@ -39,7 +39,7 @@ class Carrinho extends React.Component {
             Home
           </Link>
         </nav>
-        <div>
+        <div className="cart">
           { (cartArea)
             ? cartArea.map((e) => (
               <CartItem

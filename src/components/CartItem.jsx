@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/cartitem.css';
 
 class CartItem extends React.Component {
   constructor() {
@@ -22,33 +23,49 @@ class CartItem extends React.Component {
     const { quantity } = this.state;
     const { e, onClick } = this.props;
     return (
-      <div>
-        <p data-testid="shopping-cart-product-name">{ e.title }</p>
-        <img src={ e.thumbnail } alt={ e.title } />
-        <p>{ e.price }</p>
-        <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+      <div className="cart-item">
+        <div className="cart-icon">🛒</div>
+        <p
+          className="cart-item-title"
+          data-testid="shopping-cart-product-name"
+        >
+          { e.title }
+
+        </p>
+        <img className="cart-item-img" src={ e.thumbnail } alt={ e.title } />
+        <p className="cart-item-price">{ e.price }</p>
+        <p
+          className="cart-item-quantity"
+          data-testid="shopping-cart-product-quantity"
+        >
+          {quantity}
+
+        </p>
         <button
           onClick={ this.handleIncreaseDecrease }
           type="button"
           id="addItem"
+          className="cart-item-increase"
           data-testid="product-increase-quantity"
         >
-          +
+          ➕
         </button>
         <button
           onClick={ this.handleIncreaseDecrease }
           type="button"
           id="decreaseItem"
+          className="cart-item-decrease"
           data-testid="product-decrease-quantity"
         >
-          -
+          ➖
         </button>
         <button
           onClick={ onClick }
           type="button"
+          className="cart-item-remove"
           data-testid="remove-product"
         >
-          x
+          ❌
         </button>
       </div>
     );
