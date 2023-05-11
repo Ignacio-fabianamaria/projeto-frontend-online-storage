@@ -24,7 +24,7 @@ class CartItem extends React.Component {
     const { e, onClick } = this.props;
     return (
       <div className="cart-item">
-        <div className="cart-icon">🛒</div>
+        <div className="shoppingcart-icon">🛒</div>
         <p
           className="cart-item-title"
           data-testid="shopping-cart-product-name"
@@ -33,7 +33,11 @@ class CartItem extends React.Component {
 
         </p>
         <img className="cart-item-img" src={ e.thumbnail } alt={ e.title } />
-        <p className="cart-item-price">{ e.price }</p>
+        <p className="cart-item-price">
+          R$:
+          {' '}
+          { e.price }
+        </p>
         <p
           className="cart-item-quantity"
           data-testid="shopping-cart-product-quantity"

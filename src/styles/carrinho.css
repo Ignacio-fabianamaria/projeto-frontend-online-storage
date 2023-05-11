@@ -9,6 +9,13 @@ nav {
   padding: 1em;
 }
 
+.links-nav {
+  align-items: center;
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+}
+
 .link-home {
   font-size: 1.2em;
   font-weight: 900;
@@ -16,6 +23,16 @@ nav {
 }
 
 .link-home:hover {
+  text-decoration: underline;
+}
+
+.link-cart {
+  font-size: 1.2em;
+  font-weight: 900;
+  text-shadow: 1px 1px 2px rgba(120, 119, 119, 0.3);
+}
+
+.link-cart:hover {
   text-decoration: underline;
 }
 
